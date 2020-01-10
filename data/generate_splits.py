@@ -35,5 +35,7 @@ for i in range(1, 5):
     train_split = train_split.drop(columns=['index'])
     train_split.to_pickle("train_split_{:1d}.pkl".format(i))
 
+print(df.head(20))
+
 print("Number of unique YouTube videos: {:3d}".format(len(df['youtube_id'].unique())))
 print("Number of annotations: {:3d}".format(len(df.id)))
