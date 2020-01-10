@@ -1,13 +1,17 @@
 - step:
     name: Train
     image: python:3.6
-    command: python train.py
+    command:
+      - cp /valohai/inputs/mobilenet/mobilenetv2_1.0-f2a8633.pth.tar /valohai/repository/mobilenet_v2.pth.tar
+      - python train.py {parameters}
     parameters:
       - name: max_steps
         pass-as: --max_steps={v}
         description: Number of steps to run the trainer
         type: integer
         default: 300
-    inputs: 
+    inputs:
       - name: golfdb
         default: https://golfdb-valohai.s3-eu-west-1.amazonaws.com/videos_160.zip
+      - name: mobilenet
+        default: https://www.dropbox.com/s/47tyzpofuuyyv1b/mobilenetv2_1.0-f2a8633.pth.tar?dl=1
