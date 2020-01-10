@@ -1,6 +1,6 @@
 - step:
     name: Train
-    image: python:3.6
+    image: valohai/storch:20190603
     command: python3 train.py {parameters}
     parameters:
       - name: max_steps
