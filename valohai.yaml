@@ -1,4 +1,13 @@
 - step:
-    name: train
+    name: Train
     image: python:3.6
     command: python train.py
+    parameters:
+      - name: max_steps
+        pass-as: --max_steps={v}
+        description: Number of steps to run the trainer
+        type: integer
+        default: 300
+    inputs: 
+      - name: golfdb
+        default: https://golfdb-valohai.s3-eu-west-1.amazonaws.com/videos_160.zip
