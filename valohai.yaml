@@ -1,7 +1,15 @@
 - step:
     name: Train
     image: valohai/storch:20190603
-    command: python3 train.py {parameters}
+    command:
+      - apt update -qq
+      - apt install -y -qq libsm6 libxext6 libxrender-dev libglib2.0-0 zip unzip
+      - python3 -m pip install --upgrade pip setuptools wheel
+      - pip install opencv-python
+      - pip install pandas
+      - pip install scipy
+      - cd /valohai/repository/data && python3 generate_splits.py
+      - cd /valohai/repository && python3 train.py
     parameters:
       - name: max_steps
         pass-as: --max_steps={v}
