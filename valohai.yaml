@@ -8,6 +8,8 @@
       - pip install opencv-python
       - pip install pandas
       - pip install scipy
+      - apt-get install -y wget
+      - unzip /valohai/inputs/golfdb/videos_160.zip -d /valohai/repository/data
       - cd /valohai/repository/data && python3 generate_splits.py
       - cd /valohai/repository && python3 train.py
     parameters:
