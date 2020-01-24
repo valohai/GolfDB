@@ -5,6 +5,7 @@ import torch
 from torch.utils.data import DataLoader
 from torchvision import transforms
 import os
+import json
 
 
 if __name__ == '__main__':
@@ -64,12 +65,14 @@ if __name__ == '__main__':
             losses.update(loss.item(), images.size(0))
             optimizer.step()
             print('Iteration: {}\tLoss: {loss.val:.4f} ({loss.avg:.4f})'.format(i, loss=losses))
+            print(json.dumps({
+                'iteration': i,
+                'loss.val': losses.val,
+                'loss.avg': losses.avg
+            }))
             i += 1
             if i % it_save == 0:
                 torch.save({'optimizer_state_dict': optimizer.state_dict(),
                             'model_state_dict': model.state_dict()}, 'models/swingnet_{}.pth.tar'.format(i))
             if i == iterations:
                 break
-
-
-
